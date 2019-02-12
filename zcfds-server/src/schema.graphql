@@ -1,0 +1,94 @@
+#import MenuItem, Category, Cart, Position from '../generated/prisma/prisma.graphql'
+
+scalar DateTime
+scalar Upload
+scalar Json
+
+input RestaurantCreateInput {
+  name: String!
+  description: String!
+  telephoneNumber: String!
+  dayOfWeeks: [String!]!
+  startTime: String!
+  endTime: String!
+}
+
+type Query {
+  me: User
+  deliveryPersonnels: [User!]!
+  restaurants(isActive: Boolean): [User!]!
+  user(id: ID!): User!
+  categories: [Category!]!
+  category(id: ID!): Category!
+  menuItems: [MenuItem!]!
+  menuItem(id: ID!): MenuItem!
+  restaurant(id: ID!): User!
+  cart: Cart
+  orders: [Order!]!,
+  mypersonnels: [User!]
+  getPosition(userId: ID!): Position
+}
+
+type Mutation {
+  signup(email: String!, password: String!, firstname: String, lastname: String!, phoneNumber: String!): AuthPayload!
+  login(email: String!, password: String!): AuthPayload!
+  createUser(email: String!, password: String!, userType: UserType!, firstname: String!, lastname: String!, phoneNumber: String, 
+  plateNumber: String, profilePicture: ID, address: String, restaurant: RestaurantCreateInput, assignRestaurants: [ID!]): User!
+  updateUser(id: ID!, email: String, password: String, firstname: String, lastname: String, phoneNumber: String, 
+  plateNumber: String, profilePicture: ID, address: String, restaurant: RestaurantCreateInput, assignRestaurants: [ID!], isActive: Boolean) : User!
+  singleUpload (file: Upload!): File!
+  multipleUpload (files: [Upload!]!): [File!]!
+  createCategory(name: String!): Category!
+  updateCategory(id: ID!, name: String, isActive: Boolean): Category!
+  createMenuItem(name: String!, price: Int!, description: String!, hasSpecialInstruction: Boolean!, thumbnail: ID!, categories: [String!]!, available: Boolean!) : MenuItem!
+  updateMenuItem(id: ID!, name: String, price: Int, description: String, hasSpecialInstruction: Boolean, thumbnail: ID, categories: [String!], available: Boolean) : MenuItem!
+  deleteMenuItem(id: ID!): MenuItem!
+  addToCart(restaurant: ID!, menuItem: ID!, quantity: Int!, specialInstruction: String): Cart!
+  removeFromCart(menuItem: ID!): Cart!
+  checkout(address: String!): Cart!
+  acceptOrder(id: ID!): Order!
+  orderPrepared(id: ID!, deliveryPersonnelId: ID!): Order!
+  orderPickedUp(id: ID!): Order!
+  orderDelivered(id: ID!): Order!
+  cancelOrder(id: ID!): Order!
+  createPosition(latitude: Float!, longitude: Float!): Position!
+}
+
+type User {
+  id: ID!
+  email: String!
+  firstname: String!
+  lastname: String!
+  userType: UserType!
+  emailVerified: Boolean
+  profilePicture: File
+  address: String
+  plateNumber: String
+  phoneNumber: String
+  restaurant: Restaurant
+  assignRestaurants: [User!]!
+  isActive: Boolean!
+  positions(where: PositionWhereInput, orderBy: PositionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Position!]
+}
+
+type Restaurant {
+  id: ID!
+  name: String!
+  description: String!
+  telephoneNumber: String!
+  dayOfWeeks: [String!]
+  startTime: String!
+  endTime: String!
+  categories: [String!]!
+  priceRange: [Int!]!
+  menuItems(where: MenuItemWhereInput, orderBy: MenuItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MenuItem!]
+}
+
+type PasswordChangeRequest {
+  id: ID!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}

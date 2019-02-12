@@ -1,0 +1,119 @@
+enum UserType {
+  ADMIN
+  CLIENT
+  RESTAURANT
+  DELIVERY_PERSONNEL
+}
+
+enum OrderStatus {
+  PENDING
+  TO_PREPARE
+  TO_PICK_UP
+  TO_DELIVER
+  CANCELLED
+  COMPLETED
+}
+
+type User {
+  id: ID! @unique
+  email: String! @unique
+  password: String!
+  firstname: String!
+  lastname: String!
+  userType: UserType!
+  emailVerified: Boolean
+  profilePicture: File
+  address: String
+  plateNumber: String
+  phoneNumber: String
+  restaurant: Restaurant
+  assignRestaurants: [User!]!
+  isActive: Boolean! @default(value: "true")
+  cart: Cart @relation(name: "CartOwner")
+  positions: [Position!]!
+}
+
+type Restaurant {
+  id: ID! @unique
+  name: String! @unique
+  description: String!
+  telephoneNumber: String!
+  dayOfWeeks: [String!]
+  startTime: String!
+  endTime: String!
+  menuItems: [MenuItem!]!
+}
+
+type File {
+  id: ID! @unique
+  url: String! @unique
+  createdAt: DateTime!
+  name: String!
+  size: Int!
+  contentType: String!
+}
+
+type MenuItem {
+  id: ID! @unique
+  name: String!
+  price: Int!
+  description: String!
+  hasSpecialInstruction: Boolean! @default(value: "false")
+  thumbnail: File!
+  categories: [Category!]!
+  restaurant: Restaurant!
+  user: User!
+  available: Boolean!
+}
+
+type Category {
+  id: ID! @unique
+  name: String! @unique
+  isActive: Boolean! @default(value: "true")
+}
+
+type Order {
+  id: ID! @unique
+  status: OrderStatus!
+  restaurant: User! @relation(name: "OrderRestaurant")
+  client: User! @relation(name: "OrderClient")
+  deliveryPersonnel: User @relation(name: "OrderPersonnel") 
+  items: [OrderItem!]!
+  cancellationReason: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  address: String
+}
+
+type OrderItem {
+  id: ID! @unique
+  price: Int!
+  description: String!
+  specialInstruction: String
+  thumbnail: File!
+  categories: [Category!]!
+  user: User!
+  quantity: Int!
+}
+
+type Cart {
+  id: ID! @unique
+  user: User! @relation(name: "CartOwner")
+  restaurant: User @relation(name: "CartRestaurant")
+  cartItems: [CartItem!]!
+}
+
+type CartItem {
+  id: ID! @unique
+  specialInstruction: String
+  quantity: Int!
+  menuItem: MenuItem!
+}
+
+type Position {
+  id: ID! @unique
+  latitude: Float!
+  longitude: Float!
+  user: User!
+  createdAt: DateTime!
+}

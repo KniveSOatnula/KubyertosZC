@@ -1,0 +1,9 @@
+{
+	"script": "src/index.js",
+	"watch": true,
+	"ignore_watch" : ["node_modules", "uploads"],
+	"watch_options": {
+	  "followSymlinks": false
+	},
+	"name": "kubyertos"
+}

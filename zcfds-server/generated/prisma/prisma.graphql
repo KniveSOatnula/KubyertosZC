@@ -1,0 +1,2733 @@
+type AggregateCart {
+  count: Int!
+}
+
+type AggregateCartItem {
+  count: Int!
+}
+
+type AggregateCategory {
+  count: Int!
+}
+
+type AggregateFile {
+  count: Int!
+}
+
+type AggregateMenuItem {
+  count: Int!
+}
+
+type AggregateOrder {
+  count: Int!
+}
+
+type AggregateOrderItem {
+  count: Int!
+}
+
+type AggregatePosition {
+  count: Int!
+}
+
+type AggregateRestaurant {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type BatchPayload {
+  count: Long!
+}
+
+type Cart {
+  id: ID!
+  user: User!
+  restaurant: User
+  cartItems(where: CartItemWhereInput, orderBy: CartItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CartItem!]
+}
+
+type CartConnection {
+  pageInfo: PageInfo!
+  edges: [CartEdge]!
+  aggregate: AggregateCart!
+}
+
+input CartCreateInput {
+  user: UserCreateOneWithoutCartInput!
+  restaurant: UserCreateOneInput
+  cartItems: CartItemCreateManyInput
+}
+
+input CartCreateOneWithoutUserInput {
+  create: CartCreateWithoutUserInput
+  connect: CartWhereUniqueInput
+}
+
+input CartCreateWithoutUserInput {
+  restaurant: UserCreateOneInput
+  cartItems: CartItemCreateManyInput
+}
+
+type CartEdge {
+  node: Cart!
+  cursor: String!
+}
+
+type CartItem {
+  id: ID!
+  specialInstruction: String
+  quantity: Int!
+  menuItem: MenuItem!
+}
+
+type CartItemConnection {
+  pageInfo: PageInfo!
+  edges: [CartItemEdge]!
+  aggregate: AggregateCartItem!
+}
+
+input CartItemCreateInput {
+  specialInstruction: String
+  quantity: Int!
+  menuItem: MenuItemCreateOneInput!
+}
+
+input CartItemCreateManyInput {
+  create: [CartItemCreateInput!]
+  connect: [CartItemWhereUniqueInput!]
+}
+
+type CartItemEdge {
+  node: CartItem!
+  cursor: String!
+}
+
+enum CartItemOrderByInput {
+  id_ASC
+  id_DESC
+  specialInstruction_ASC
+  specialInstruction_DESC
+  quantity_ASC
+  quantity_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type CartItemPreviousValues {
+  id: ID!
+  specialInstruction: String
+  quantity: Int!
+}
+
+input CartItemScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  specialInstruction: String
+  specialInstruction_not: String
+  specialInstruction_in: [String!]
+  specialInstruction_not_in: [String!]
+  specialInstruction_lt: String
+  specialInstruction_lte: String
+  specialInstruction_gt: String
+  specialInstruction_gte: String
+  specialInstruction_contains: String
+  specialInstruction_not_contains: String
+  specialInstruction_starts_with: String
+  specialInstruction_not_starts_with: String
+  specialInstruction_ends_with: String
+  specialInstruction_not_ends_with: String
+  quantity: Int
+  quantity_not: Int
+  quantity_in: [Int!]
+  quantity_not_in: [Int!]
+  quantity_lt: Int
+  quantity_lte: Int
+  quantity_gt: Int
+  quantity_gte: Int
+  AND: [CartItemScalarWhereInput!]
+  OR: [CartItemScalarWhereInput!]
+  NOT: [CartItemScalarWhereInput!]
+}
+
+type CartItemSubscriptionPayload {
+  mutation: MutationType!
+  node: CartItem
+  updatedFields: [String!]
+  previousValues: CartItemPreviousValues
+}
+
+input CartItemSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CartItemWhereInput
+  AND: [CartItemSubscriptionWhereInput!]
+  OR: [CartItemSubscriptionWhereInput!]
+  NOT: [CartItemSubscriptionWhereInput!]
+}
+
+input CartItemUpdateDataInput {
+  specialInstruction: String
+  quantity: Int
+  menuItem: MenuItemUpdateOneRequiredInput
+}
+
+input CartItemUpdateInput {
+  specialInstruction: String
+  quantity: Int
+  menuItem: MenuItemUpdateOneRequiredInput
+}
+
+input CartItemUpdateManyDataInput {
+  specialInstruction: String
+  quantity: Int
+}
+
+input CartItemUpdateManyInput {
+  create: [CartItemCreateInput!]
+  update: [CartItemUpdateWithWhereUniqueNestedInput!]
+  upsert: [CartItemUpsertWithWhereUniqueNestedInput!]
+  delete: [CartItemWhereUniqueInput!]
+  connect: [CartItemWhereUniqueInput!]
+  disconnect: [CartItemWhereUniqueInput!]
+  deleteMany: [CartItemScalarWhereInput!]
+  updateMany: [CartItemUpdateManyWithWhereNestedInput!]
+}
+
+input CartItemUpdateManyMutationInput {
+  specialInstruction: String
+  quantity: Int
+}
+
+input CartItemUpdateManyWithWhereNestedInput {
+  where: CartItemScalarWhereInput!
+  data: CartItemUpdateManyDataInput!
+}
+
+input CartItemUpdateWithWhereUniqueNestedInput {
+  where: CartItemWhereUniqueInput!
+  data: CartItemUpdateDataInput!
+}
+
+input CartItemUpsertWithWhereUniqueNestedInput {
+  where: CartItemWhereUniqueInput!
+  update: CartItemUpdateDataInput!
+  create: CartItemCreateInput!
+}
+
+input CartItemWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  specialInstruction: String
+  specialInstruction_not: String
+  specialInstruction_in: [String!]
+  specialInstruction_not_in: [String!]
+  specialInstruction_lt: String
+  specialInstruction_lte: String
+  specialInstruction_gt: String
+  specialInstruction_gte: String
+  specialInstruction_contains: String
+  specialInstruction_not_contains: String
+  specialInstruction_starts_with: String
+  specialInstruction_not_starts_with: String
+  specialInstruction_ends_with: String
+  specialInstruction_not_ends_with: String
+  quantity: Int
+  quantity_not: Int
+  quantity_in: [Int!]
+  quantity_not_in: [Int!]
+  quantity_lt: Int
+  quantity_lte: Int
+  quantity_gt: Int
+  quantity_gte: Int
+  menuItem: MenuItemWhereInput
+  AND: [CartItemWhereInput!]
+  OR: [CartItemWhereInput!]
+  NOT: [CartItemWhereInput!]
+}
+
+input CartItemWhereUniqueInput {
+  id: ID
+}
+
+enum CartOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type CartPreviousValues {
+  id: ID!
+}
+
+type CartSubscriptionPayload {
+  mutation: MutationType!
+  node: Cart
+  updatedFields: [String!]
+  previousValues: CartPreviousValues
+}
+
+input CartSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CartWhereInput
+  AND: [CartSubscriptionWhereInput!]
+  OR: [CartSubscriptionWhereInput!]
+  NOT: [CartSubscriptionWhereInput!]
+}
+
+input CartUpdateInput {
+  user: UserUpdateOneRequiredWithoutCartInput
+  restaurant: UserUpdateOneInput
+  cartItems: CartItemUpdateManyInput
+}
+
+input CartUpdateOneWithoutUserInput {
+  create: CartCreateWithoutUserInput
+  update: CartUpdateWithoutUserDataInput
+  upsert: CartUpsertWithoutUserInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: CartWhereUniqueInput
+}
+
+input CartUpdateWithoutUserDataInput {
+  restaurant: UserUpdateOneInput
+  cartItems: CartItemUpdateManyInput
+}
+
+input CartUpsertWithoutUserInput {
+  update: CartUpdateWithoutUserDataInput!
+  create: CartCreateWithoutUserInput!
+}
+
+input CartWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  user: UserWhereInput
+  restaurant: UserWhereInput
+  cartItems_every: CartItemWhereInput
+  cartItems_some: CartItemWhereInput
+  cartItems_none: CartItemWhereInput
+  AND: [CartWhereInput!]
+  OR: [CartWhereInput!]
+  NOT: [CartWhereInput!]
+}
+
+input CartWhereUniqueInput {
+  id: ID
+}
+
+type Category {
+  id: ID!
+  name: String!
+  isActive: Boolean!
+}
+
+type CategoryConnection {
+  pageInfo: PageInfo!
+  edges: [CategoryEdge]!
+  aggregate: AggregateCategory!
+}
+
+input CategoryCreateInput {
+  name: String!
+  isActive: Boolean
+}
+
+input CategoryCreateManyInput {
+  create: [CategoryCreateInput!]
+  connect: [CategoryWhereUniqueInput!]
+}
+
+type CategoryEdge {
+  node: Category!
+  cursor: String!
+}
+
+enum CategoryOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  isActive_ASC
+  isActive_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type CategoryPreviousValues {
+  id: ID!
+  name: String!
+  isActive: Boolean!
+}
+
+input CategoryScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  isActive: Boolean
+  isActive_not: Boolean
+  AND: [CategoryScalarWhereInput!]
+  OR: [CategoryScalarWhereInput!]
+  NOT: [CategoryScalarWhereInput!]
+}
+
+type CategorySubscriptionPayload {
+  mutation: MutationType!
+  node: Category
+  updatedFields: [String!]
+  previousValues: CategoryPreviousValues
+}
+
+input CategorySubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CategoryWhereInput
+  AND: [CategorySubscriptionWhereInput!]
+  OR: [CategorySubscriptionWhereInput!]
+  NOT: [CategorySubscriptionWhereInput!]
+}
+
+input CategoryUpdateDataInput {
+  name: String
+  isActive: Boolean
+}
+
+input CategoryUpdateInput {
+  name: String
+  isActive: Boolean
+}
+
+input CategoryUpdateManyDataInput {
+  name: String
+  isActive: Boolean
+}
+
+input CategoryUpdateManyInput {
+  create: [CategoryCreateInput!]
+  update: [CategoryUpdateWithWhereUniqueNestedInput!]
+  upsert: [CategoryUpsertWithWhereUniqueNestedInput!]
+  delete: [CategoryWhereUniqueInput!]
+  connect: [CategoryWhereUniqueInput!]
+  disconnect: [CategoryWhereUniqueInput!]
+  deleteMany: [CategoryScalarWhereInput!]
+  updateMany: [CategoryUpdateManyWithWhereNestedInput!]
+}
+
+input CategoryUpdateManyMutationInput {
+  name: String
+  isActive: Boolean
+}
+
+input CategoryUpdateManyWithWhereNestedInput {
+  where: CategoryScalarWhereInput!
+  data: CategoryUpdateManyDataInput!
+}
+
+input CategoryUpdateWithWhereUniqueNestedInput {
+  where: CategoryWhereUniqueInput!
+  data: CategoryUpdateDataInput!
+}
+
+input CategoryUpsertWithWhereUniqueNestedInput {
+  where: CategoryWhereUniqueInput!
+  update: CategoryUpdateDataInput!
+  create: CategoryCreateInput!
+}
+
+input CategoryWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  isActive: Boolean
+  isActive_not: Boolean
+  AND: [CategoryWhereInput!]
+  OR: [CategoryWhereInput!]
+  NOT: [CategoryWhereInput!]
+}
+
+input CategoryWhereUniqueInput {
+  id: ID
+  name: String
+}
+
+scalar DateTime
+
+type File {
+  id: ID!
+  url: String!
+  createdAt: DateTime!
+  name: String!
+  size: Int!
+  contentType: String!
+}
+
+type FileConnection {
+  pageInfo: PageInfo!
+  edges: [FileEdge]!
+  aggregate: AggregateFile!
+}
+
+input FileCreateInput {
+  url: String!
+  name: String!
+  size: Int!
+  contentType: String!
+}
+
+input FileCreateOneInput {
+  create: FileCreateInput
+  connect: FileWhereUniqueInput
+}
+
+type FileEdge {
+  node: File!
+  cursor: String!
+}
+
+enum FileOrderByInput {
+  id_ASC
+  id_DESC
+  url_ASC
+  url_DESC
+  createdAt_ASC
+  createdAt_DESC
+  name_ASC
+  name_DESC
+  size_ASC
+  size_DESC
+  contentType_ASC
+  contentType_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type FilePreviousValues {
+  id: ID!
+  url: String!
+  createdAt: DateTime!
+  name: String!
+  size: Int!
+  contentType: String!
+}
+
+type FileSubscriptionPayload {
+  mutation: MutationType!
+  node: File
+  updatedFields: [String!]
+  previousValues: FilePreviousValues
+}
+
+input FileSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: FileWhereInput
+  AND: [FileSubscriptionWhereInput!]
+  OR: [FileSubscriptionWhereInput!]
+  NOT: [FileSubscriptionWhereInput!]
+}
+
+input FileUpdateDataInput {
+  url: String
+  name: String
+  size: Int
+  contentType: String
+}
+
+input FileUpdateInput {
+  url: String
+  name: String
+  size: Int
+  contentType: String
+}
+
+input FileUpdateManyMutationInput {
+  url: String
+  name: String
+  size: Int
+  contentType: String
+}
+
+input FileUpdateOneInput {
+  create: FileCreateInput
+  update: FileUpdateDataInput
+  upsert: FileUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: FileWhereUniqueInput
+}
+
+input FileUpdateOneRequiredInput {
+  create: FileCreateInput
+  update: FileUpdateDataInput
+  upsert: FileUpsertNestedInput
+  connect: FileWhereUniqueInput
+}
+
+input FileUpsertNestedInput {
+  update: FileUpdateDataInput!
+  create: FileCreateInput!
+}
+
+input FileWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  url: String
+  url_not: String
+  url_in: [String!]
+  url_not_in: [String!]
+  url_lt: String
+  url_lte: String
+  url_gt: String
+  url_gte: String
+  url_contains: String
+  url_not_contains: String
+  url_starts_with: String
+  url_not_starts_with: String
+  url_ends_with: String
+  url_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  size: Int
+  size_not: Int
+  size_in: [Int!]
+  size_not_in: [Int!]
+  size_lt: Int
+  size_lte: Int
+  size_gt: Int
+  size_gte: Int
+  contentType: String
+  contentType_not: String
+  contentType_in: [String!]
+  contentType_not_in: [String!]
+  contentType_lt: String
+  contentType_lte: String
+  contentType_gt: String
+  contentType_gte: String
+  contentType_contains: String
+  contentType_not_contains: String
+  contentType_starts_with: String
+  contentType_not_starts_with: String
+  contentType_ends_with: String
+  contentType_not_ends_with: String
+  AND: [FileWhereInput!]
+  OR: [FileWhereInput!]
+  NOT: [FileWhereInput!]
+}
+
+input FileWhereUniqueInput {
+  id: ID
+  url: String
+}
+
+scalar Long
+
+type MenuItem {
+  id: ID!
+  name: String!
+  price: Int!
+  description: String!
+  hasSpecialInstruction: Boolean!
+  thumbnail: File!
+  categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category!]
+  restaurant: Restaurant!
+  user: User!
+  available: Boolean!
+}
+
+type MenuItemConnection {
+  pageInfo: PageInfo!
+  edges: [MenuItemEdge]!
+  aggregate: AggregateMenuItem!
+}
+
+input MenuItemCreateInput {
+  name: String!
+  price: Int!
+  description: String!
+  hasSpecialInstruction: Boolean
+  thumbnail: FileCreateOneInput!
+  categories: CategoryCreateManyInput
+  restaurant: RestaurantCreateOneWithoutMenuItemsInput!
+  user: UserCreateOneInput!
+  available: Boolean!
+}
+
+input MenuItemCreateManyWithoutRestaurantInput {
+  create: [MenuItemCreateWithoutRestaurantInput!]
+  connect: [MenuItemWhereUniqueInput!]
+}
+
+input MenuItemCreateOneInput {
+  create: MenuItemCreateInput
+  connect: MenuItemWhereUniqueInput
+}
+
+input MenuItemCreateWithoutRestaurantInput {
+  name: String!
+  price: Int!
+  description: String!
+  hasSpecialInstruction: Boolean
+  thumbnail: FileCreateOneInput!
+  categories: CategoryCreateManyInput
+  user: UserCreateOneInput!
+  available: Boolean!
+}
+
+type MenuItemEdge {
+  node: MenuItem!
+  cursor: String!
+}
+
+enum MenuItemOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  price_ASC
+  price_DESC
+  description_ASC
+  description_DESC
+  hasSpecialInstruction_ASC
+  hasSpecialInstruction_DESC
+  available_ASC
+  available_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type MenuItemPreviousValues {
+  id: ID!
+  name: String!
+  price: Int!
+  description: String!
+  hasSpecialInstruction: Boolean!
+  available: Boolean!
+}
+
+input MenuItemScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  price: Int
+  price_not: Int
+  price_in: [Int!]
+  price_not_in: [Int!]
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  hasSpecialInstruction: Boolean
+  hasSpecialInstruction_not: Boolean
+  available: Boolean
+  available_not: Boolean
+  AND: [MenuItemScalarWhereInput!]
+  OR: [MenuItemScalarWhereInput!]
+  NOT: [MenuItemScalarWhereInput!]
+}
+
+type MenuItemSubscriptionPayload {
+  mutation: MutationType!
+  node: MenuItem
+  updatedFields: [String!]
+  previousValues: MenuItemPreviousValues
+}
+
+input MenuItemSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: MenuItemWhereInput
+  AND: [MenuItemSubscriptionWhereInput!]
+  OR: [MenuItemSubscriptionWhereInput!]
+  NOT: [MenuItemSubscriptionWhereInput!]
+}
+
+input MenuItemUpdateDataInput {
+  name: String
+  price: Int
+  description: String
+  hasSpecialInstruction: Boolean
+  thumbnail: FileUpdateOneRequiredInput
+  categories: CategoryUpdateManyInput
+  restaurant: RestaurantUpdateOneRequiredWithoutMenuItemsInput
+  user: UserUpdateOneRequiredInput
+  available: Boolean
+}
+
+input MenuItemUpdateInput {
+  name: String
+  price: Int
+  description: String
+  hasSpecialInstruction: Boolean
+  thumbnail: FileUpdateOneRequiredInput
+  categories: CategoryUpdateManyInput
+  restaurant: RestaurantUpdateOneRequiredWithoutMenuItemsInput
+  user: UserUpdateOneRequiredInput
+  available: Boolean
+}
+
+input MenuItemUpdateManyDataInput {
+  name: String
+  price: Int
+  description: String
+  hasSpecialInstruction: Boolean
+  available: Boolean
+}
+
+input MenuItemUpdateManyMutationInput {
+  name: String
+  price: Int
+  description: String
+  hasSpecialInstruction: Boolean
+  available: Boolean
+}
+
+input MenuItemUpdateManyWithoutRestaurantInput {
+  create: [MenuItemCreateWithoutRestaurantInput!]
+  delete: [MenuItemWhereUniqueInput!]
+  connect: [MenuItemWhereUniqueInput!]
+  disconnect: [MenuItemWhereUniqueInput!]
+  update: [MenuItemUpdateWithWhereUniqueWithoutRestaurantInput!]
+  upsert: [MenuItemUpsertWithWhereUniqueWithoutRestaurantInput!]
+  deleteMany: [MenuItemScalarWhereInput!]
+  updateMany: [MenuItemUpdateManyWithWhereNestedInput!]
+}
+
+input MenuItemUpdateManyWithWhereNestedInput {
+  where: MenuItemScalarWhereInput!
+  data: MenuItemUpdateManyDataInput!
+}
+
+input MenuItemUpdateOneRequiredInput {
+  create: MenuItemCreateInput
+  update: MenuItemUpdateDataInput
+  upsert: MenuItemUpsertNestedInput
+  connect: MenuItemWhereUniqueInput
+}
+
+input MenuItemUpdateWithoutRestaurantDataInput {
+  name: String
+  price: Int
+  description: String
+  hasSpecialInstruction: Boolean
+  thumbnail: FileUpdateOneRequiredInput
+  categories: CategoryUpdateManyInput
+  user: UserUpdateOneRequiredInput
+  available: Boolean
+}
+
+input MenuItemUpdateWithWhereUniqueWithoutRestaurantInput {
+  where: MenuItemWhereUniqueInput!
+  data: MenuItemUpdateWithoutRestaurantDataInput!
+}
+
+input MenuItemUpsertNestedInput {
+  update: MenuItemUpdateDataInput!
+  create: MenuItemCreateInput!
+}
+
+input MenuItemUpsertWithWhereUniqueWithoutRestaurantInput {
+  where: MenuItemWhereUniqueInput!
+  update: MenuItemUpdateWithoutRestaurantDataInput!
+  create: MenuItemCreateWithoutRestaurantInput!
+}
+
+input MenuItemWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  price: Int
+  price_not: Int
+  price_in: [Int!]
+  price_not_in: [Int!]
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  hasSpecialInstruction: Boolean
+  hasSpecialInstruction_not: Boolean
+  thumbnail: FileWhereInput
+  categories_every: CategoryWhereInput
+  categories_some: CategoryWhereInput
+  categories_none: CategoryWhereInput
+  restaurant: RestaurantWhereInput
+  user: UserWhereInput
+  available: Boolean
+  available_not: Boolean
+  AND: [MenuItemWhereInput!]
+  OR: [MenuItemWhereInput!]
+  NOT: [MenuItemWhereInput!]
+}
+
+input MenuItemWhereUniqueInput {
+  id: ID
+}
+
+type Mutation {
+  createCart(data: CartCreateInput!): Cart!
+  updateCart(data: CartUpdateInput!, where: CartWhereUniqueInput!): Cart
+  upsertCart(where: CartWhereUniqueInput!, create: CartCreateInput!, update: CartUpdateInput!): Cart!
+  deleteCart(where: CartWhereUniqueInput!): Cart
+  deleteManyCarts(where: CartWhereInput): BatchPayload!
+  createCartItem(data: CartItemCreateInput!): CartItem!
+  updateCartItem(data: CartItemUpdateInput!, where: CartItemWhereUniqueInput!): CartItem
+  updateManyCartItems(data: CartItemUpdateManyMutationInput!, where: CartItemWhereInput): BatchPayload!
+  upsertCartItem(where: CartItemWhereUniqueInput!, create: CartItemCreateInput!, update: CartItemUpdateInput!): CartItem!
+  deleteCartItem(where: CartItemWhereUniqueInput!): CartItem
+  deleteManyCartItems(where: CartItemWhereInput): BatchPayload!
+  createCategory(data: CategoryCreateInput!): Category!
+  updateCategory(data: CategoryUpdateInput!, where: CategoryWhereUniqueInput!): Category
+  updateManyCategories(data: CategoryUpdateManyMutationInput!, where: CategoryWhereInput): BatchPayload!
+  upsertCategory(where: CategoryWhereUniqueInput!, create: CategoryCreateInput!, update: CategoryUpdateInput!): Category!
+  deleteCategory(where: CategoryWhereUniqueInput!): Category
+  deleteManyCategories(where: CategoryWhereInput): BatchPayload!
+  createFile(data: FileCreateInput!): File!
+  updateFile(data: FileUpdateInput!, where: FileWhereUniqueInput!): File
+  updateManyFiles(data: FileUpdateManyMutationInput!, where: FileWhereInput): BatchPayload!
+  upsertFile(where: FileWhereUniqueInput!, create: FileCreateInput!, update: FileUpdateInput!): File!
+  deleteFile(where: FileWhereUniqueInput!): File
+  deleteManyFiles(where: FileWhereInput): BatchPayload!
+  createMenuItem(data: MenuItemCreateInput!): MenuItem!
+  updateMenuItem(data: MenuItemUpdateInput!, where: MenuItemWhereUniqueInput!): MenuItem
+  updateManyMenuItems(data: MenuItemUpdateManyMutationInput!, where: MenuItemWhereInput): BatchPayload!
+  upsertMenuItem(where: MenuItemWhereUniqueInput!, create: MenuItemCreateInput!, update: MenuItemUpdateInput!): MenuItem!
+  deleteMenuItem(where: MenuItemWhereUniqueInput!): MenuItem
+  deleteManyMenuItems(where: MenuItemWhereInput): BatchPayload!
+  createOrder(data: OrderCreateInput!): Order!
+  updateOrder(data: OrderUpdateInput!, where: OrderWhereUniqueInput!): Order
+  updateManyOrders(data: OrderUpdateManyMutationInput!, where: OrderWhereInput): BatchPayload!
+  upsertOrder(where: OrderWhereUniqueInput!, create: OrderCreateInput!, update: OrderUpdateInput!): Order!
+  deleteOrder(where: OrderWhereUniqueInput!): Order
+  deleteManyOrders(where: OrderWhereInput): BatchPayload!
+  createOrderItem(data: OrderItemCreateInput!): OrderItem!
+  updateOrderItem(data: OrderItemUpdateInput!, where: OrderItemWhereUniqueInput!): OrderItem
+  updateManyOrderItems(data: OrderItemUpdateManyMutationInput!, where: OrderItemWhereInput): BatchPayload!
+  upsertOrderItem(where: OrderItemWhereUniqueInput!, create: OrderItemCreateInput!, update: OrderItemUpdateInput!): OrderItem!
+  deleteOrderItem(where: OrderItemWhereUniqueInput!): OrderItem
+  deleteManyOrderItems(where: OrderItemWhereInput): BatchPayload!
+  createPosition(data: PositionCreateInput!): Position!
+  updatePosition(data: PositionUpdateInput!, where: PositionWhereUniqueInput!): Position
+  updateManyPositions(data: PositionUpdateManyMutationInput!, where: PositionWhereInput): BatchPayload!
+  upsertPosition(where: PositionWhereUniqueInput!, create: PositionCreateInput!, update: PositionUpdateInput!): Position!
+  deletePosition(where: PositionWhereUniqueInput!): Position
+  deleteManyPositions(where: PositionWhereInput): BatchPayload!
+  createRestaurant(data: RestaurantCreateInput!): Restaurant!
+  updateRestaurant(data: RestaurantUpdateInput!, where: RestaurantWhereUniqueInput!): Restaurant
+  updateManyRestaurants(data: RestaurantUpdateManyMutationInput!, where: RestaurantWhereInput): BatchPayload!
+  upsertRestaurant(where: RestaurantWhereUniqueInput!, create: RestaurantCreateInput!, update: RestaurantUpdateInput!): Restaurant!
+  deleteRestaurant(where: RestaurantWhereUniqueInput!): Restaurant
+  deleteManyRestaurants(where: RestaurantWhereInput): BatchPayload!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+interface Node {
+  id: ID!
+}
+
+type Order {
+  id: ID!
+  status: OrderStatus!
+  restaurant: User!
+  client: User!
+  deliveryPersonnel: User
+  items(where: OrderItemWhereInput, orderBy: OrderItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [OrderItem!]
+  cancellationReason: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  address: String
+}
+
+type OrderConnection {
+  pageInfo: PageInfo!
+  edges: [OrderEdge]!
+  aggregate: AggregateOrder!
+}
+
+input OrderCreateInput {
+  status: OrderStatus!
+  restaurant: UserCreateOneInput!
+  client: UserCreateOneInput!
+  deliveryPersonnel: UserCreateOneInput
+  items: OrderItemCreateManyInput
+  cancellationReason: String
+  address: String
+}
+
+type OrderEdge {
+  node: Order!
+  cursor: String!
+}
+
+type OrderItem {
+  id: ID!
+  price: Int!
+  description: String!
+  specialInstruction: String
+  thumbnail: File!
+  categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category!]
+  user: User!
+  quantity: Int!
+}
+
+type OrderItemConnection {
+  pageInfo: PageInfo!
+  edges: [OrderItemEdge]!
+  aggregate: AggregateOrderItem!
+}
+
+input OrderItemCreateInput {
+  price: Int!
+  description: String!
+  specialInstruction: String
+  thumbnail: FileCreateOneInput!
+  categories: CategoryCreateManyInput
+  user: UserCreateOneInput!
+  quantity: Int!
+}
+
+input OrderItemCreateManyInput {
+  create: [OrderItemCreateInput!]
+  connect: [OrderItemWhereUniqueInput!]
+}
+
+type OrderItemEdge {
+  node: OrderItem!
+  cursor: String!
+}
+
+enum OrderItemOrderByInput {
+  id_ASC
+  id_DESC
+  price_ASC
+  price_DESC
+  description_ASC
+  description_DESC
+  specialInstruction_ASC
+  specialInstruction_DESC
+  quantity_ASC
+  quantity_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type OrderItemPreviousValues {
+  id: ID!
+  price: Int!
+  description: String!
+  specialInstruction: String
+  quantity: Int!
+}
+
+input OrderItemScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  price: Int
+  price_not: Int
+  price_in: [Int!]
+  price_not_in: [Int!]
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  specialInstruction: String
+  specialInstruction_not: String
+  specialInstruction_in: [String!]
+  specialInstruction_not_in: [String!]
+  specialInstruction_lt: String
+  specialInstruction_lte: String
+  specialInstruction_gt: String
+  specialInstruction_gte: String
+  specialInstruction_contains: String
+  specialInstruction_not_contains: String
+  specialInstruction_starts_with: String
+  specialInstruction_not_starts_with: String
+  specialInstruction_ends_with: String
+  specialInstruction_not_ends_with: String
+  quantity: Int
+  quantity_not: Int
+  quantity_in: [Int!]
+  quantity_not_in: [Int!]
+  quantity_lt: Int
+  quantity_lte: Int
+  quantity_gt: Int
+  quantity_gte: Int
+  AND: [OrderItemScalarWhereInput!]
+  OR: [OrderItemScalarWhereInput!]
+  NOT: [OrderItemScalarWhereInput!]
+}
+
+type OrderItemSubscriptionPayload {
+  mutation: MutationType!
+  node: OrderItem
+  updatedFields: [String!]
+  previousValues: OrderItemPreviousValues
+}
+
+input OrderItemSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: OrderItemWhereInput
+  AND: [OrderItemSubscriptionWhereInput!]
+  OR: [OrderItemSubscriptionWhereInput!]
+  NOT: [OrderItemSubscriptionWhereInput!]
+}
+
+input OrderItemUpdateDataInput {
+  price: Int
+  description: String
+  specialInstruction: String
+  thumbnail: FileUpdateOneRequiredInput
+  categories: CategoryUpdateManyInput
+  user: UserUpdateOneRequiredInput
+  quantity: Int
+}
+
+input OrderItemUpdateInput {
+  price: Int
+  description: String
+  specialInstruction: String
+  thumbnail: FileUpdateOneRequiredInput
+  categories: CategoryUpdateManyInput
+  user: UserUpdateOneRequiredInput
+  quantity: Int
+}
+
+input OrderItemUpdateManyDataInput {
+  price: Int
+  description: String
+  specialInstruction: String
+  quantity: Int
+}
+
+input OrderItemUpdateManyInput {
+  create: [OrderItemCreateInput!]
+  update: [OrderItemUpdateWithWhereUniqueNestedInput!]
+  upsert: [OrderItemUpsertWithWhereUniqueNestedInput!]
+  delete: [OrderItemWhereUniqueInput!]
+  connect: [OrderItemWhereUniqueInput!]
+  disconnect: [OrderItemWhereUniqueInput!]
+  deleteMany: [OrderItemScalarWhereInput!]
+  updateMany: [OrderItemUpdateManyWithWhereNestedInput!]
+}
+
+input OrderItemUpdateManyMutationInput {
+  price: Int
+  description: String
+  specialInstruction: String
+  quantity: Int
+}
+
+input OrderItemUpdateManyWithWhereNestedInput {
+  where: OrderItemScalarWhereInput!
+  data: OrderItemUpdateManyDataInput!
+}
+
+input OrderItemUpdateWithWhereUniqueNestedInput {
+  where: OrderItemWhereUniqueInput!
+  data: OrderItemUpdateDataInput!
+}
+
+input OrderItemUpsertWithWhereUniqueNestedInput {
+  where: OrderItemWhereUniqueInput!
+  update: OrderItemUpdateDataInput!
+  create: OrderItemCreateInput!
+}
+
+input OrderItemWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  price: Int
+  price_not: Int
+  price_in: [Int!]
+  price_not_in: [Int!]
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  specialInstruction: String
+  specialInstruction_not: String
+  specialInstruction_in: [String!]
+  specialInstruction_not_in: [String!]
+  specialInstruction_lt: String
+  specialInstruction_lte: String
+  specialInstruction_gt: String
+  specialInstruction_gte: String
+  specialInstruction_contains: String
+  specialInstruction_not_contains: String
+  specialInstruction_starts_with: String
+  specialInstruction_not_starts_with: String
+  specialInstruction_ends_with: String
+  specialInstruction_not_ends_with: String
+  thumbnail: FileWhereInput
+  categories_every: CategoryWhereInput
+  categories_some: CategoryWhereInput
+  categories_none: CategoryWhereInput
+  user: UserWhereInput
+  quantity: Int
+  quantity_not: Int
+  quantity_in: [Int!]
+  quantity_not_in: [Int!]
+  quantity_lt: Int
+  quantity_lte: Int
+  quantity_gt: Int
+  quantity_gte: Int
+  AND: [OrderItemWhereInput!]
+  OR: [OrderItemWhereInput!]
+  NOT: [OrderItemWhereInput!]
+}
+
+input OrderItemWhereUniqueInput {
+  id: ID
+}
+
+enum OrderOrderByInput {
+  id_ASC
+  id_DESC
+  status_ASC
+  status_DESC
+  cancellationReason_ASC
+  cancellationReason_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  address_ASC
+  address_DESC
+}
+
+type OrderPreviousValues {
+  id: ID!
+  status: OrderStatus!
+  cancellationReason: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  address: String
+}
+
+enum OrderStatus {
+  PENDING
+  TO_PREPARE
+  TO_PICK_UP
+  TO_DELIVER
+  CANCELLED
+  COMPLETED
+}
+
+type OrderSubscriptionPayload {
+  mutation: MutationType!
+  node: Order
+  updatedFields: [String!]
+  previousValues: OrderPreviousValues
+}
+
+input OrderSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: OrderWhereInput
+  AND: [OrderSubscriptionWhereInput!]
+  OR: [OrderSubscriptionWhereInput!]
+  NOT: [OrderSubscriptionWhereInput!]
+}
+
+input OrderUpdateInput {
+  status: OrderStatus
+  restaurant: UserUpdateOneRequiredInput
+  client: UserUpdateOneRequiredInput
+  deliveryPersonnel: UserUpdateOneInput
+  items: OrderItemUpdateManyInput
+  cancellationReason: String
+  address: String
+}
+
+input OrderUpdateManyMutationInput {
+  status: OrderStatus
+  cancellationReason: String
+  address: String
+}
+
+input OrderWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  status: OrderStatus
+  status_not: OrderStatus
+  status_in: [OrderStatus!]
+  status_not_in: [OrderStatus!]
+  restaurant: UserWhereInput
+  client: UserWhereInput
+  deliveryPersonnel: UserWhereInput
+  items_every: OrderItemWhereInput
+  items_some: OrderItemWhereInput
+  items_none: OrderItemWhereInput
+  cancellationReason: String
+  cancellationReason_not: String
+  cancellationReason_in: [String!]
+  cancellationReason_not_in: [String!]
+  cancellationReason_lt: String
+  cancellationReason_lte: String
+  cancellationReason_gt: String
+  cancellationReason_gte: String
+  cancellationReason_contains: String
+  cancellationReason_not_contains: String
+  cancellationReason_starts_with: String
+  cancellationReason_not_starts_with: String
+  cancellationReason_ends_with: String
+  cancellationReason_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  address: String
+  address_not: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_lt: String
+  address_lte: String
+  address_gt: String
+  address_gte: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
+  AND: [OrderWhereInput!]
+  OR: [OrderWhereInput!]
+  NOT: [OrderWhereInput!]
+}
+
+input OrderWhereUniqueInput {
+  id: ID
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Position {
+  id: ID!
+  latitude: Float!
+  longitude: Float!
+  user: User!
+}
+
+type PositionConnection {
+  pageInfo: PageInfo!
+  edges: [PositionEdge]!
+  aggregate: AggregatePosition!
+}
+
+input PositionCreateInput {
+  latitude: Float!
+  longitude: Float!
+  user: UserCreateOneWithoutPositionsInput!
+}
+
+input PositionCreateManyWithoutUserInput {
+  create: [PositionCreateWithoutUserInput!]
+  connect: [PositionWhereUniqueInput!]
+}
+
+input PositionCreateWithoutUserInput {
+  latitude: Float!
+  longitude: Float!
+}
+
+type PositionEdge {
+  node: Position!
+  cursor: String!
+}
+
+enum PositionOrderByInput {
+  id_ASC
+  id_DESC
+  latitude_ASC
+  latitude_DESC
+  longitude_ASC
+  longitude_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type PositionPreviousValues {
+  id: ID!
+  latitude: Float!
+  longitude: Float!
+}
+
+input PositionScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  latitude: Float
+  latitude_not: Float
+  latitude_in: [Float!]
+  latitude_not_in: [Float!]
+  latitude_lt: Float
+  latitude_lte: Float
+  latitude_gt: Float
+  latitude_gte: Float
+  longitude: Float
+  longitude_not: Float
+  longitude_in: [Float!]
+  longitude_not_in: [Float!]
+  longitude_lt: Float
+  longitude_lte: Float
+  longitude_gt: Float
+  longitude_gte: Float
+  AND: [PositionScalarWhereInput!]
+  OR: [PositionScalarWhereInput!]
+  NOT: [PositionScalarWhereInput!]
+}
+
+type PositionSubscriptionPayload {
+  mutation: MutationType!
+  node: Position
+  updatedFields: [String!]
+  previousValues: PositionPreviousValues
+}
+
+input PositionSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: PositionWhereInput
+  AND: [PositionSubscriptionWhereInput!]
+  OR: [PositionSubscriptionWhereInput!]
+  NOT: [PositionSubscriptionWhereInput!]
+}
+
+input PositionUpdateInput {
+  latitude: Float
+  longitude: Float
+  user: UserUpdateOneRequiredWithoutPositionsInput
+}
+
+input PositionUpdateManyDataInput {
+  latitude: Float
+  longitude: Float
+}
+
+input PositionUpdateManyMutationInput {
+  latitude: Float
+  longitude: Float
+}
+
+input PositionUpdateManyWithoutUserInput {
+  create: [PositionCreateWithoutUserInput!]
+  delete: [PositionWhereUniqueInput!]
+  connect: [PositionWhereUniqueInput!]
+  disconnect: [PositionWhereUniqueInput!]
+  update: [PositionUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [PositionUpsertWithWhereUniqueWithoutUserInput!]
+  deleteMany: [PositionScalarWhereInput!]
+  updateMany: [PositionUpdateManyWithWhereNestedInput!]
+}
+
+input PositionUpdateManyWithWhereNestedInput {
+  where: PositionScalarWhereInput!
+  data: PositionUpdateManyDataInput!
+}
+
+input PositionUpdateWithoutUserDataInput {
+  latitude: Float
+  longitude: Float
+}
+
+input PositionUpdateWithWhereUniqueWithoutUserInput {
+  where: PositionWhereUniqueInput!
+  data: PositionUpdateWithoutUserDataInput!
+}
+
+input PositionUpsertWithWhereUniqueWithoutUserInput {
+  where: PositionWhereUniqueInput!
+  update: PositionUpdateWithoutUserDataInput!
+  create: PositionCreateWithoutUserInput!
+}
+
+input PositionWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  latitude: Float
+  latitude_not: Float
+  latitude_in: [Float!]
+  latitude_not_in: [Float!]
+  latitude_lt: Float
+  latitude_lte: Float
+  latitude_gt: Float
+  latitude_gte: Float
+  longitude: Float
+  longitude_not: Float
+  longitude_in: [Float!]
+  longitude_not_in: [Float!]
+  longitude_lt: Float
+  longitude_lte: Float
+  longitude_gt: Float
+  longitude_gte: Float
+  user: UserWhereInput
+  AND: [PositionWhereInput!]
+  OR: [PositionWhereInput!]
+  NOT: [PositionWhereInput!]
+}
+
+input PositionWhereUniqueInput {
+  id: ID
+}
+
+type Query {
+  cart(where: CartWhereUniqueInput!): Cart
+  carts(where: CartWhereInput, orderBy: CartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Cart]!
+  cartsConnection(where: CartWhereInput, orderBy: CartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CartConnection!
+  cartItem(where: CartItemWhereUniqueInput!): CartItem
+  cartItems(where: CartItemWhereInput, orderBy: CartItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CartItem]!
+  cartItemsConnection(where: CartItemWhereInput, orderBy: CartItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CartItemConnection!
+  category(where: CategoryWhereUniqueInput!): Category
+  categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category]!
+  categoriesConnection(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CategoryConnection!
+  file(where: FileWhereUniqueInput!): File
+  files(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [File]!
+  filesConnection(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FileConnection!
+  menuItem(where: MenuItemWhereUniqueInput!): MenuItem
+  menuItems(where: MenuItemWhereInput, orderBy: MenuItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MenuItem]!
+  menuItemsConnection(where: MenuItemWhereInput, orderBy: MenuItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MenuItemConnection!
+  order(where: OrderWhereUniqueInput!): Order
+  orders(where: OrderWhereInput, orderBy: OrderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Order]!
+  ordersConnection(where: OrderWhereInput, orderBy: OrderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OrderConnection!
+  orderItem(where: OrderItemWhereUniqueInput!): OrderItem
+  orderItems(where: OrderItemWhereInput, orderBy: OrderItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [OrderItem]!
+  orderItemsConnection(where: OrderItemWhereInput, orderBy: OrderItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OrderItemConnection!
+  position(where: PositionWhereUniqueInput!): Position
+  positions(where: PositionWhereInput, orderBy: PositionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Position]!
+  positionsConnection(where: PositionWhereInput, orderBy: PositionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PositionConnection!
+  restaurant(where: RestaurantWhereUniqueInput!): Restaurant
+  restaurants(where: RestaurantWhereInput, orderBy: RestaurantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Restaurant]!
+  restaurantsConnection(where: RestaurantWhereInput, orderBy: RestaurantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RestaurantConnection!
+  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  node(id: ID!): Node
+}
+
+type Restaurant {
+  id: ID!
+  name: String!
+  description: String!
+  telephoneNumber: String!
+  dayOfWeeks: [String!]!
+  startTime: String!
+  endTime: String!
+  menuItems(where: MenuItemWhereInput, orderBy: MenuItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MenuItem!]
+}
+
+type RestaurantConnection {
+  pageInfo: PageInfo!
+  edges: [RestaurantEdge]!
+  aggregate: AggregateRestaurant!
+}
+
+input RestaurantCreatedayOfWeeksInput {
+  set: [String!]
+}
+
+input RestaurantCreateInput {
+  name: String!
+  description: String!
+  telephoneNumber: String!
+  dayOfWeeks: RestaurantCreatedayOfWeeksInput
+  startTime: String!
+  endTime: String!
+  menuItems: MenuItemCreateManyWithoutRestaurantInput
+}
+
+input RestaurantCreateOneInput {
+  create: RestaurantCreateInput
+  connect: RestaurantWhereUniqueInput
+}
+
+input RestaurantCreateOneWithoutMenuItemsInput {
+  create: RestaurantCreateWithoutMenuItemsInput
+  connect: RestaurantWhereUniqueInput
+}
+
+input RestaurantCreateWithoutMenuItemsInput {
+  name: String!
+  description: String!
+  telephoneNumber: String!
+  dayOfWeeks: RestaurantCreatedayOfWeeksInput
+  startTime: String!
+  endTime: String!
+}
+
+type RestaurantEdge {
+  node: Restaurant!
+  cursor: String!
+}
+
+enum RestaurantOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  description_ASC
+  description_DESC
+  telephoneNumber_ASC
+  telephoneNumber_DESC
+  startTime_ASC
+  startTime_DESC
+  endTime_ASC
+  endTime_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type RestaurantPreviousValues {
+  id: ID!
+  name: String!
+  description: String!
+  telephoneNumber: String!
+  dayOfWeeks: [String!]!
+  startTime: String!
+  endTime: String!
+}
+
+type RestaurantSubscriptionPayload {
+  mutation: MutationType!
+  node: Restaurant
+  updatedFields: [String!]
+  previousValues: RestaurantPreviousValues
+}
+
+input RestaurantSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: RestaurantWhereInput
+  AND: [RestaurantSubscriptionWhereInput!]
+  OR: [RestaurantSubscriptionWhereInput!]
+  NOT: [RestaurantSubscriptionWhereInput!]
+}
+
+input RestaurantUpdateDataInput {
+  name: String
+  description: String
+  telephoneNumber: String
+  dayOfWeeks: RestaurantUpdatedayOfWeeksInput
+  startTime: String
+  endTime: String
+  menuItems: MenuItemUpdateManyWithoutRestaurantInput
+}
+
+input RestaurantUpdatedayOfWeeksInput {
+  set: [String!]
+}
+
+input RestaurantUpdateInput {
+  name: String
+  description: String
+  telephoneNumber: String
+  dayOfWeeks: RestaurantUpdatedayOfWeeksInput
+  startTime: String
+  endTime: String
+  menuItems: MenuItemUpdateManyWithoutRestaurantInput
+}
+
+input RestaurantUpdateManyMutationInput {
+  name: String
+  description: String
+  telephoneNumber: String
+  dayOfWeeks: RestaurantUpdatedayOfWeeksInput
+  startTime: String
+  endTime: String
+}
+
+input RestaurantUpdateOneInput {
+  create: RestaurantCreateInput
+  update: RestaurantUpdateDataInput
+  upsert: RestaurantUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: RestaurantWhereUniqueInput
+}
+
+input RestaurantUpdateOneRequiredWithoutMenuItemsInput {
+  create: RestaurantCreateWithoutMenuItemsInput
+  update: RestaurantUpdateWithoutMenuItemsDataInput
+  upsert: RestaurantUpsertWithoutMenuItemsInput
+  connect: RestaurantWhereUniqueInput
+}
+
+input RestaurantUpdateWithoutMenuItemsDataInput {
+  name: String
+  description: String
+  telephoneNumber: String
+  dayOfWeeks: RestaurantUpdatedayOfWeeksInput
+  startTime: String
+  endTime: String
+}
+
+input RestaurantUpsertNestedInput {
+  update: RestaurantUpdateDataInput!
+  create: RestaurantCreateInput!
+}
+
+input RestaurantUpsertWithoutMenuItemsInput {
+  update: RestaurantUpdateWithoutMenuItemsDataInput!
+  create: RestaurantCreateWithoutMenuItemsInput!
+}
+
+input RestaurantWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  telephoneNumber: String
+  telephoneNumber_not: String
+  telephoneNumber_in: [String!]
+  telephoneNumber_not_in: [String!]
+  telephoneNumber_lt: String
+  telephoneNumber_lte: String
+  telephoneNumber_gt: String
+  telephoneNumber_gte: String
+  telephoneNumber_contains: String
+  telephoneNumber_not_contains: String
+  telephoneNumber_starts_with: String
+  telephoneNumber_not_starts_with: String
+  telephoneNumber_ends_with: String
+  telephoneNumber_not_ends_with: String
+  startTime: String
+  startTime_not: String
+  startTime_in: [String!]
+  startTime_not_in: [String!]
+  startTime_lt: String
+  startTime_lte: String
+  startTime_gt: String
+  startTime_gte: String
+  startTime_contains: String
+  startTime_not_contains: String
+  startTime_starts_with: String
+  startTime_not_starts_with: String
+  startTime_ends_with: String
+  startTime_not_ends_with: String
+  endTime: String
+  endTime_not: String
+  endTime_in: [String!]
+  endTime_not_in: [String!]
+  endTime_lt: String
+  endTime_lte: String
+  endTime_gt: String
+  endTime_gte: String
+  endTime_contains: String
+  endTime_not_contains: String
+  endTime_starts_with: String
+  endTime_not_starts_with: String
+  endTime_ends_with: String
+  endTime_not_ends_with: String
+  menuItems_every: MenuItemWhereInput
+  menuItems_some: MenuItemWhereInput
+  menuItems_none: MenuItemWhereInput
+  AND: [RestaurantWhereInput!]
+  OR: [RestaurantWhereInput!]
+  NOT: [RestaurantWhereInput!]
+}
+
+input RestaurantWhereUniqueInput {
+  id: ID
+  name: String
+}
+
+type Subscription {
+  cart(where: CartSubscriptionWhereInput): CartSubscriptionPayload
+  cartItem(where: CartItemSubscriptionWhereInput): CartItemSubscriptionPayload
+  category(where: CategorySubscriptionWhereInput): CategorySubscriptionPayload
+  file(where: FileSubscriptionWhereInput): FileSubscriptionPayload
+  menuItem(where: MenuItemSubscriptionWhereInput): MenuItemSubscriptionPayload
+  order(where: OrderSubscriptionWhereInput): OrderSubscriptionPayload
+  orderItem(where: OrderItemSubscriptionWhereInput): OrderItemSubscriptionPayload
+  position(where: PositionSubscriptionWhereInput): PositionSubscriptionPayload
+  restaurant(where: RestaurantSubscriptionWhereInput): RestaurantSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+}
+
+type User {
+  id: ID!
+  email: String!
+  password: String!
+  firstname: String!
+  lastname: String!
+  userType: UserType!
+  emailVerified: Boolean
+  profilePicture: File
+  address: String
+  plateNumber: String
+  phoneNumber: String
+  restaurant: Restaurant
+  assignRestaurants(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  isActive: Boolean!
+  cart: Cart
+  positions(where: PositionWhereInput, orderBy: PositionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Position!]
+}
+
+type UserConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  email: String!
+  password: String!
+  firstname: String!
+  lastname: String!
+  userType: UserType!
+  emailVerified: Boolean
+  profilePicture: FileCreateOneInput
+  address: String
+  plateNumber: String
+  phoneNumber: String
+  restaurant: RestaurantCreateOneInput
+  assignRestaurants: UserCreateManyInput
+  isActive: Boolean
+  cart: CartCreateOneWithoutUserInput
+  positions: PositionCreateManyWithoutUserInput
+}
+
+input UserCreateManyInput {
+  create: [UserCreateInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutCartInput {
+  create: UserCreateWithoutCartInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutPositionsInput {
+  create: UserCreateWithoutPositionsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutCartInput {
+  email: String!
+  password: String!
+  firstname: String!
+  lastname: String!
+  userType: UserType!
+  emailVerified: Boolean
+  profilePicture: FileCreateOneInput
+  address: String
+  plateNumber: String
+  phoneNumber: String
+  restaurant: RestaurantCreateOneInput
+  assignRestaurants: UserCreateManyInput
+  isActive: Boolean
+  positions: PositionCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutPositionsInput {
+  email: String!
+  password: String!
+  firstname: String!
+  lastname: String!
+  userType: UserType!
+  emailVerified: Boolean
+  profilePicture: FileCreateOneInput
+  address: String
+  plateNumber: String
+  phoneNumber: String
+  restaurant: RestaurantCreateOneInput
+  assignRestaurants: UserCreateManyInput
+  isActive: Boolean
+  cart: CartCreateOneWithoutUserInput
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  email_ASC
+  email_DESC
+  password_ASC
+  password_DESC
+  firstname_ASC
+  firstname_DESC
+  lastname_ASC
+  lastname_DESC
+  userType_ASC
+  userType_DESC
+  emailVerified_ASC
+  emailVerified_DESC
+  address_ASC
+  address_DESC
+  plateNumber_ASC
+  plateNumber_DESC
+  phoneNumber_ASC
+  phoneNumber_DESC
+  isActive_ASC
+  isActive_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  email: String!
+  password: String!
+  firstname: String!
+  lastname: String!
+  userType: UserType!
+  emailVerified: Boolean
+  address: String
+  plateNumber: String
+  phoneNumber: String
+  isActive: Boolean!
+}
+
+input UserScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  firstname: String
+  firstname_not: String
+  firstname_in: [String!]
+  firstname_not_in: [String!]
+  firstname_lt: String
+  firstname_lte: String
+  firstname_gt: String
+  firstname_gte: String
+  firstname_contains: String
+  firstname_not_contains: String
+  firstname_starts_with: String
+  firstname_not_starts_with: String
+  firstname_ends_with: String
+  firstname_not_ends_with: String
+  lastname: String
+  lastname_not: String
+  lastname_in: [String!]
+  lastname_not_in: [String!]
+  lastname_lt: String
+  lastname_lte: String
+  lastname_gt: String
+  lastname_gte: String
+  lastname_contains: String
+  lastname_not_contains: String
+  lastname_starts_with: String
+  lastname_not_starts_with: String
+  lastname_ends_with: String
+  lastname_not_ends_with: String
+  userType: UserType
+  userType_not: UserType
+  userType_in: [UserType!]
+  userType_not_in: [UserType!]
+  emailVerified: Boolean
+  emailVerified_not: Boolean
+  address: String
+  address_not: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_lt: String
+  address_lte: String
+  address_gt: String
+  address_gte: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
+  plateNumber: String
+  plateNumber_not: String
+  plateNumber_in: [String!]
+  plateNumber_not_in: [String!]
+  plateNumber_lt: String
+  plateNumber_lte: String
+  plateNumber_gt: String
+  plateNumber_gte: String
+  plateNumber_contains: String
+  plateNumber_not_contains: String
+  plateNumber_starts_with: String
+  plateNumber_not_starts_with: String
+  plateNumber_ends_with: String
+  plateNumber_not_ends_with: String
+  phoneNumber: String
+  phoneNumber_not: String
+  phoneNumber_in: [String!]
+  phoneNumber_not_in: [String!]
+  phoneNumber_lt: String
+  phoneNumber_lte: String
+  phoneNumber_gt: String
+  phoneNumber_gte: String
+  phoneNumber_contains: String
+  phoneNumber_not_contains: String
+  phoneNumber_starts_with: String
+  phoneNumber_not_starts_with: String
+  phoneNumber_ends_with: String
+  phoneNumber_not_ends_with: String
+  isActive: Boolean
+  isActive_not: Boolean
+  AND: [UserScalarWhereInput!]
+  OR: [UserScalarWhereInput!]
+  NOT: [UserScalarWhereInput!]
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+  AND: [UserSubscriptionWhereInput!]
+  OR: [UserSubscriptionWhereInput!]
+  NOT: [UserSubscriptionWhereInput!]
+}
+
+enum UserType {
+  ADMIN
+  CLIENT
+  RESTAURANT
+  DELIVERY_PERSONNEL
+}
+
+input UserUpdateDataInput {
+  email: String
+  password: String
+  firstname: String
+  lastname: String
+  userType: UserType
+  emailVerified: Boolean
+  profilePicture: FileUpdateOneInput
+  address: String
+  plateNumber: String
+  phoneNumber: String
+  restaurant: RestaurantUpdateOneInput
+  assignRestaurants: UserUpdateManyInput
+  isActive: Boolean
+  cart: CartUpdateOneWithoutUserInput
+  positions: PositionUpdateManyWithoutUserInput
+}
+
+input UserUpdateInput {
+  email: String
+  password: String
+  firstname: String
+  lastname: String
+  userType: UserType
+  emailVerified: Boolean
+  profilePicture: FileUpdateOneInput
+  address: String
+  plateNumber: String
+  phoneNumber: String
+  restaurant: RestaurantUpdateOneInput
+  assignRestaurants: UserUpdateManyInput
+  isActive: Boolean
+  cart: CartUpdateOneWithoutUserInput
+  positions: PositionUpdateManyWithoutUserInput
+}
+
+input UserUpdateManyDataInput {
+  email: String
+  password: String
+  firstname: String
+  lastname: String
+  userType: UserType
+  emailVerified: Boolean
+  address: String
+  plateNumber: String
+  phoneNumber: String
+  isActive: Boolean
+}
+
+input UserUpdateManyInput {
+  create: [UserCreateInput!]
+  update: [UserUpdateWithWhereUniqueNestedInput!]
+  upsert: [UserUpsertWithWhereUniqueNestedInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
+input UserUpdateManyMutationInput {
+  email: String
+  password: String
+  firstname: String
+  lastname: String
+  userType: UserType
+  emailVerified: Boolean
+  address: String
+  plateNumber: String
+  phoneNumber: String
+  isActive: Boolean
+}
+
+input UserUpdateManyWithWhereNestedInput {
+  where: UserScalarWhereInput!
+  data: UserUpdateManyDataInput!
+}
+
+input UserUpdateOneInput {
+  create: UserCreateInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneRequiredInput {
+  create: UserCreateInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneRequiredWithoutCartInput {
+  create: UserCreateWithoutCartInput
+  update: UserUpdateWithoutCartDataInput
+  upsert: UserUpsertWithoutCartInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneRequiredWithoutPositionsInput {
+  create: UserCreateWithoutPositionsInput
+  update: UserUpdateWithoutPositionsDataInput
+  upsert: UserUpsertWithoutPositionsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutCartDataInput {
+  email: String
+  password: String
+  firstname: String
+  lastname: String
+  userType: UserType
+  emailVerified: Boolean
+  profilePicture: FileUpdateOneInput
+  address: String
+  plateNumber: String
+  phoneNumber: String
+  restaurant: RestaurantUpdateOneInput
+  assignRestaurants: UserUpdateManyInput
+  isActive: Boolean
+  positions: PositionUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutPositionsDataInput {
+  email: String
+  password: String
+  firstname: String
+  lastname: String
+  userType: UserType
+  emailVerified: Boolean
+  profilePicture: FileUpdateOneInput
+  address: String
+  plateNumber: String
+  phoneNumber: String
+  restaurant: RestaurantUpdateOneInput
+  assignRestaurants: UserUpdateManyInput
+  isActive: Boolean
+  cart: CartUpdateOneWithoutUserInput
+}
+
+input UserUpdateWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateDataInput!
+}
+
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
+}
+
+input UserUpsertWithoutCartInput {
+  update: UserUpdateWithoutCartDataInput!
+  create: UserCreateWithoutCartInput!
+}
+
+input UserUpsertWithoutPositionsInput {
+  update: UserUpdateWithoutPositionsDataInput!
+  create: UserCreateWithoutPositionsInput!
+}
+
+input UserUpsertWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
+}
+
+input UserWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  firstname: String
+  firstname_not: String
+  firstname_in: [String!]
+  firstname_not_in: [String!]
+  firstname_lt: String
+  firstname_lte: String
+  firstname_gt: String
+  firstname_gte: String
+  firstname_contains: String
+  firstname_not_contains: String
+  firstname_starts_with: String
+  firstname_not_starts_with: String
+  firstname_ends_with: String
+  firstname_not_ends_with: String
+  lastname: String
+  lastname_not: String
+  lastname_in: [String!]
+  lastname_not_in: [String!]
+  lastname_lt: String
+  lastname_lte: String
+  lastname_gt: String
+  lastname_gte: String
+  lastname_contains: String
+  lastname_not_contains: String
+  lastname_starts_with: String
+  lastname_not_starts_with: String
+  lastname_ends_with: String
+  lastname_not_ends_with: String
+  userType: UserType
+  userType_not: UserType
+  userType_in: [UserType!]
+  userType_not_in: [UserType!]
+  emailVerified: Boolean
+  emailVerified_not: Boolean
+  profilePicture: FileWhereInput
+  address: String
+  address_not: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_lt: String
+  address_lte: String
+  address_gt: String
+  address_gte: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
+  plateNumber: String
+  plateNumber_not: String
+  plateNumber_in: [String!]
+  plateNumber_not_in: [String!]
+  plateNumber_lt: String
+  plateNumber_lte: String
+  plateNumber_gt: String
+  plateNumber_gte: String
+  plateNumber_contains: String
+  plateNumber_not_contains: String
+  plateNumber_starts_with: String
+  plateNumber_not_starts_with: String
+  plateNumber_ends_with: String
+  plateNumber_not_ends_with: String
+  phoneNumber: String
+  phoneNumber_not: String
+  phoneNumber_in: [String!]
+  phoneNumber_not_in: [String!]
+  phoneNumber_lt: String
+  phoneNumber_lte: String
+  phoneNumber_gt: String
+  phoneNumber_gte: String
+  phoneNumber_contains: String
+  phoneNumber_not_contains: String
+  phoneNumber_starts_with: String
+  phoneNumber_not_starts_with: String
+  phoneNumber_ends_with: String
+  phoneNumber_not_ends_with: String
+  restaurant: RestaurantWhereInput
+  assignRestaurants_every: UserWhereInput
+  assignRestaurants_some: UserWhereInput
+  assignRestaurants_none: UserWhereInput
+  isActive: Boolean
+  isActive_not: Boolean
+  cart: CartWhereInput
+  positions_every: PositionWhereInput
+  positions_some: PositionWhereInput
+  positions_none: PositionWhereInput
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  email: String
+}
